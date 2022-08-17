@@ -1,3 +1,4 @@
-import * as DevvAtoms from "@client/components/atoms";
+import * as AthAtoms from "@client/components/atoms";
+import AthRootComponent from "@client/components/root.component";
 
-export { DevvAtoms };
+export { AthAtoms, AthRootComponent };

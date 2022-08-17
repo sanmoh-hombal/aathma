@@ -1,3 +1,3 @@
-import DevvButtonComponent from "@client/components/atoms/button";
+import AthButtonComponent from "@client/components/atoms/button";
 
-export { DevvButtonComponent };
+export { AthButtonComponent };

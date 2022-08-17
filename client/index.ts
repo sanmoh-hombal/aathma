@@ -8,6 +8,7 @@ body.classList.add("text-base");
 const app: HTMLDivElement = document.querySelector<HTMLDivElement>("#app")!;
 
 customElements.define("ath-button", AthComponents.AthAtoms.AthButtonComponent, { extends: "button" });
+customElements.define("ath-input", AthComponents.AthAtoms.AthInputComponent, { extends: "input" });
 
 customElements.define("ath-root", AthComponents.AthRootComponent);
 

@@ -1,5 +1,7 @@
-import { resolve } from "path";
+import reactPlugin from "@vitejs/plugin-react";
 import { ProxyOptions, UserConfig } from "vite";
+
+import { resolve } from "path";
 
 const proxy: Record<string, string | ProxyOptions> = {
 	"/api": {
@@ -10,6 +12,7 @@ const proxy: Record<string, string | ProxyOptions> = {
 };
 
 const configuration: UserConfig = {
+	plugins: [reactPlugin()],
 	build: {
 		outDir: "dist/client",
 	},

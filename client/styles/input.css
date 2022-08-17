@@ -1,0 +1,12 @@
+.devv-input {
+	@apply inline-block;
+	@apply transition duration-200;
+	@apply border focus:border-secondary-900;
+	@apply rounded;
+	@apply px-4 py-2;
+
+	&.small {
+		@apply text-sm;
+		@apply px-2 py-1;
+	}
+}

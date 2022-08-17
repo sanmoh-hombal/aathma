@@ -9,7 +9,7 @@ const AthInput: React.FC<IAthInputProps> = ({ disabled, loading, small, ...rest 
 	const classes: Array<string> = ["ath-input"];
 	small && classes.push("small");
 
-	return <input disabled={loading || disabled} {...rest} className={classes.join(" ")} />;
+	return <input disabled={loading || disabled} {...rest} className={`${classes.join(" ")} ${rest.className}`} />;
 };
 
 export default AthInput;

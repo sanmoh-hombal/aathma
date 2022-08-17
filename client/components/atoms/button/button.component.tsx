@@ -22,7 +22,7 @@ const AthButton: React.FC<IAthButtonProps> = ({
 	small && classes.push("small");
 
 	return (
-		<button {...rest} disabled={loading || disabled} className={classes.join(" ")}>
+		<button {...rest} disabled={loading || disabled} className={`${classes.join(" ")} ${rest.className}`}>
 			{loading ? "Loading ..." : children}
 		</button>
 	);

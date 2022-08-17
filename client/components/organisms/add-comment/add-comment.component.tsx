@@ -16,7 +16,6 @@ const AthAddComment: React.FC<IAthAddCommentProps> = ({ onComplete }: IAthAddCom
 
 	const _fetchUser = async () => {
 		try {
-			console.log("Hello");
 			setLoading(true);
 			const user: IUser | null = await UserService.get();
 			setUser(user);

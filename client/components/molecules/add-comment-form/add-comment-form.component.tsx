@@ -15,7 +15,7 @@ const AthAddCommentForm: React.FC<IAthAddCommentFormProps> = ({
 	const [comment, setComment] = useState<string>("");
 
 	return (
-		<form {...rest} className={`flex ${rest.className}`}>
+		<form {...rest} className={`flex flex-1 ${rest.className}`}>
 			<AthInput
 				placeholder="What are your thoughts?"
 				loading={loading}

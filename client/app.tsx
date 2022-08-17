@@ -1,9 +1,30 @@
+import React, { useEffect, useState } from "react";
+
+import AthAddComment from "@client/components/organisms/add-comment";
+import AthListComment from "@client/components/organisms/list-comment";
+
+import { CommentService } from "@client/services";
 import { ICommentUserUpvote } from "@global/types/comment.type";
-import React from "react";
-import { AthAddCommentComponent } from "./components/organisms";
 
-const handleComplete = (comment: ICommentUserUpvote) => console.log(comment);
+const App: React.FC = (): JSX.Element => {
+	const [comments, setComments] = useState<Array<ICommentUserUpvote>>([]);
 
-const App: React.FC = (): JSX.Element => <AthAddCommentComponent onComplete={handleComplete} />;
+	const _refreshComments = async (): Promise<void> => {
+		const comments: Array<ICommentUserUpvote> = await CommentService.get();
+		setComments(comments);
+	};
+
+	useEffect(() => {
+		_refreshComments();
+	}, []);
+
+	return (
+		<div className="mx-auto my-40 px-8 py-4 sm:w-1/2">
+			<div className="text-xl font-bold text-center sm:text-left">Discussion</div>
+			<AthAddComment onComplete={_refreshComments} />
+			<AthListComment comments={comments} />
+		</div>
+	);
+};
 
 export default App;

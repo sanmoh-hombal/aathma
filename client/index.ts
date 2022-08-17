@@ -13,6 +13,8 @@ customElements.define("ath-input", AthComponents.AthAtoms.AthInputComponent, { e
 customElements.define("ath-add-comment-form", AthComponents.AthMolecules.AthAddCommentFormComponent, {
 	extends: "form",
 });
+customElements.define("ath-comment", AthComponents.AthMolecules.AthCommentComponent);
+customElements.define("ath-upvote-comment", AthComponents.AthMolecules.AthUpvoteCommentComponent);
 
 customElements.define("ath-root", AthComponents.AthRootComponent);
 

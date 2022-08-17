@@ -1,0 +1,45 @@
+{
+	"name": "aathma",
+	"version": "0.0.0",
+	"description": "A simple UI/API/WS hybrid application for random commenting and upvoting",
+	"repository": "https://github.com/sanmoh-hombal/aathma.git",
+	"author": "Sanmoh Hombal <sanmoh.hombal@gmail.com>",
+	"type": "commonjs",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"start": "vite preview",
+		"prepare": "ts-patch install && husky install"
+	},
+	"devDependencies": {
+		"@types/node": "^18.7.6",
+		"@typescript-eslint/eslint-plugin": ">=5.28.0",
+		"@typescript-eslint/parser": ">=5.28.0",
+		"commitizen": "^4.2.5",
+		"concurrently": "^7.3.0",
+		"cz-gitmoji": "^0.0.7",
+		"eslint": ">=8.0.0",
+		"eslint-config-google": "^0.14.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.0.3",
+		"nodemon": "^2.0.19",
+		"prettier": "^2.7.1",
+		"rimraf": "^3.0.2",
+		"ts-node": "^10.9.1",
+		"ts-patch": "^2.0.2",
+		"ttypescript": "^1.5.13",
+		"typescript": ">=4.4",
+		"typescript-transform-paths": "^3.3.1",
+		"vite": "^3.0.7"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json,html}": "npx eslint --fix"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-gitmoji"
+		}
+	}
+}

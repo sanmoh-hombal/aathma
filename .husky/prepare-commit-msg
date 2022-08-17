@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# shellcheck disable=SC2015
+exec < /dev/tty && npx cz --hook || true

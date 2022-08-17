@@ -14,4 +14,16 @@ model user {
   firstName String
   lastName  String
   picture   String
+
+  comments comment[]
+}
+
+model comment {
+  id      String    @id @db.Uuid
+  created DateTime? @default(now())
+  updated DateTime? @default(now())
+  userId  String    @db.Uuid
+  content String
+
+  user user @relation(fields: [userId], references: [id])
 }

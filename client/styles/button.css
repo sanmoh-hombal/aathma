@@ -1,0 +1,24 @@
+.ath-button {
+	@apply inline-block;
+	@apply transition duration-200;
+	@apply bg-primary-600 hover:bg-primary-800 disabled:opacity-75;
+	@apply text-white font-semibold;
+	@apply rounded;
+	@apply px-4 py-2;
+
+	&.small {
+		@apply px-2 py-1;
+		@apply text-sm;
+	}
+
+	&.secondary {
+		@apply bg-transparent disabled:opacity-75;
+		@apply text-secondary-500 hover:text-secondary-900 font-bold;
+		@apply px-0 py-1;
+	}
+
+	&.active {
+		@apply text-primary-500 hover:text-primary-900 font-bold;
+		@apply px-0 py-1;
+	}
+}

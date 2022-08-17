@@ -10,6 +10,7 @@ export interface IAthButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 const AthButton: React.FC<IAthButtonProps> = ({
 	children,
 	active,
+	disabled,
 	loading,
 	secondary,
 	small,
@@ -21,7 +22,7 @@ const AthButton: React.FC<IAthButtonProps> = ({
 	small && classes.push("small");
 
 	return (
-		<button {...rest} className={classes.join(" ")}>
+		<button {...rest} disabled={loading || disabled} className={classes.join(" ")}>
 			{loading ? "Loading ..." : children}
 		</button>
 	);

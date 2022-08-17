@@ -30,12 +30,12 @@ export default class extends HTMLFormElement {
 	public connectedCallback(): void {
 		this.classList.add("flex");
 
-		const inputHTML: string = `<input autofocus id="comment-input" is="devv-input" placeholder="What are your thoughts?" class="flex-1">`;
+		const inputHTML: string = `<input autofocus id="comment-input" is="ath-input" placeholder="What are your thoughts?" class="flex-1">`;
 		const input = new DOMParser().parseFromString(inputHTML, "text/html").body.childNodes[0] as HTMLElement;
 		input.addEventListener("input", this.handleInput.bind(this));
 		this.appendChild(input);
 
-		const submitHTML: string = `<button id="comment-submit" is="devv-button" type="submit" class="ml-4">Comment</button>`;
+		const submitHTML: string = `<button id="comment-submit" is="ath-button" type="submit" class="ml-4">Comment</button>`;
 		const submit = new DOMParser().parseFromString(submitHTML, "text/html").body.childNodes[0] as HTMLElement;
 		submit.setAttribute("disabled", String(true));
 		this.appendChild(submit);

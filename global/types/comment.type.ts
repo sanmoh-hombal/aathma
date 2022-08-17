@@ -1,6 +1,7 @@
+import { IUpvote } from "@global/types/upvote.types";
 import { IUser } from "@global/types/user.type";
 import { comment as IComment } from "@prisma/client";
 
-type ICommentUser = IComment & { user: IUser };
+type ICommentUserUpvote = IComment & { user?: IUser; upvotes?: Array<IUpvote> };
 
-export type { IComment, ICommentUser };
+export type { IComment, ICommentUserUpvote };

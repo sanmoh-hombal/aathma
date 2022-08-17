@@ -23,7 +23,7 @@ const AthAddCommentForm: React.FC<IAthAddCommentFormProps> = ({
 				onInput={(event) => setComment((event.target as HTMLInputElement).value)}
 				className="flex-1"
 			/>
-			<AthButton loading={loading} disabled={!comment} type="submit">
+			<AthButton loading={loading} disabled={!comment} type="submit" className="ml-4">
 				Submit
 			</AthButton>
 		</form>

@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 
 import { AxiosUtil } from "@client/utils";
+
 import { IUser } from "@global/types/user.type";
 
 /**

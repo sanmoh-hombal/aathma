@@ -17,6 +17,7 @@ customElements.define("ath-comment", AthComponents.AthMolecules.AthCommentCompon
 customElements.define("ath-upvote-comment", AthComponents.AthMolecules.AthUpvoteCommentComponent);
 
 customElements.define("ath-add-comment", AthComponents.AthOrganisms.AthAddCommentComponent);
+customElements.define("ath-list-comment", AthComponents.AthOrganisms.AthListCommentComponent);
 
 customElements.define("ath-root", AthComponents.AthRootComponent);
 

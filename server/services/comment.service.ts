@@ -12,7 +12,10 @@ import { UserService } from "@server/services";
  */
 export async function get(): Promise<Array<IComment>> {
 	try {
-		return await PrismaClient.comment.findMany({ orderBy: { created: "desc" } });
+		return await PrismaClient.comment.findMany({
+			orderBy: { created: "desc" },
+			include: { user: true, upvotes: true },
+		});
 	} catch (e) {
 		throw e;
 	} finally {

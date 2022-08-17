@@ -1,4 +1,5 @@
 .ath-button {
+	@apply flex items-center;
 	@apply inline-block;
 	@apply transition duration-200;
 	@apply bg-primary-600 hover:bg-primary-800 disabled:opacity-75;

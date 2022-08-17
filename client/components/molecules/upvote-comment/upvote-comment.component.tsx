@@ -19,13 +19,13 @@ const AthUpvoteComment: React.FC<IAthUpvoteCommentProps> = ({
 	...rest
 }: IAthUpvoteCommentProps): JSX.Element => {
 	const [loading, setLoading] = useState<boolean>(false);
-	const [upvotesCount, setUpvotesCount] = useState<number>(upvotes.length);
+	const [derivedUpvotes, setDerivedUpvotes] = useState<Array<IUpvote>>(upvotes);
 
 	const handleClick = async (): Promise<void> => {
 		try {
 			setLoading(true);
 			const updatedComment: ICommentUserUpvote = await UpvoteService.toggle(commentId);
-			setUpvotesCount(updatedComment.upvotes?.length || 0);
+			setDerivedUpvotes(updatedComment.upvotes || []);
 		} finally {
 			setLoading(false);
 		}
@@ -34,7 +34,9 @@ const AthUpvoteComment: React.FC<IAthUpvoteCommentProps> = ({
 	return (
 		<AthButtonComponent
 			loading={loading}
-			active={upvotes.filter((upvote: IUpvote) => upvote.userId === UserService.getIdFromLocalStorage()).length > 0}
+			active={
+				derivedUpvotes.filter((upvote: IUpvote) => upvote.userId === UserService.getIdFromLocalStorage()).length > 0
+			}
 			secondary
 			small
 			onClick={handleClick}
@@ -42,7 +44,7 @@ const AthUpvoteComment: React.FC<IAthUpvoteCommentProps> = ({
 		>
 			<span>&#9650;</span>
 			<span className="px-2">Upvote</span>
-			{upvotesCount > 0 ? <span className="text-xs border-l pl-2">{upvotesCount}</span> : ""}
+			{derivedUpvotes.length > 0 ? <span className="text-xs border-l pl-2">{derivedUpvotes.length}</span> : ""}
 		</AthButtonComponent>
 	);
 };

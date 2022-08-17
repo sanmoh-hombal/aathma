@@ -16,6 +16,8 @@ customElements.define("ath-add-comment-form", AthComponents.AthMolecules.AthAddC
 customElements.define("ath-comment", AthComponents.AthMolecules.AthCommentComponent);
 customElements.define("ath-upvote-comment", AthComponents.AthMolecules.AthUpvoteCommentComponent);
 
+customElements.define("ath-add-comment", AthComponents.AthOrganisms.AthAddCommentComponent);
+
 customElements.define("ath-root", AthComponents.AthRootComponent);
 
 app.innerHTML = `<ath-root><ath-root/>`;

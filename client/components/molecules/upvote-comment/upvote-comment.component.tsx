@@ -37,6 +37,7 @@ const AthUpvoteComment: React.FC<IAthUpvoteCommentProps> = ({
 			active={
 				derivedUpvotes.filter((upvote: IUpvote) => upvote.userId === UserService.getIdFromLocalStorage()).length > 0
 			}
+			disabled={!UserService.getIdFromLocalStorage()}
 			secondary
 			small
 			onClick={handleClick}

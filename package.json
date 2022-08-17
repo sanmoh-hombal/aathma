@@ -43,7 +43,8 @@
 		"vite": "^3.0.7"
 	},
 	"lint-staged": {
-		"*.{js,jsx,ts,tsx,json,html}": "npx eslint --fix"
+		"*.{js,jsx,ts,tsx,json,html}": "npx eslint --fix",
+		"*.prisma": "npx prisma format"
 	},
 	"config": {
 		"commitizen": {

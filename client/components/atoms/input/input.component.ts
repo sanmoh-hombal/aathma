@@ -24,7 +24,7 @@ export default class extends HTMLInputElement {
 	}
 
 	connectedCallback(): void {
-		this.classList.add("devv-input");
+		this.classList.add("ath-input");
 	}
 
 	static get observedAttributes(): Array<string> {

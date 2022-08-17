@@ -1,4 +1,4 @@
-.devv-input {
+.ath-input {
 	@apply inline-block;
 	@apply transition duration-200;
 	@apply border focus:border-secondary-900;

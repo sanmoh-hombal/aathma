@@ -16,6 +16,7 @@ model user {
   picture   String
 
   comments comment[]
+  upvotes  upvote[]
 }
 
 model comment {
@@ -25,5 +26,17 @@ model comment {
   userId  String    @db.Uuid
   content String
 
-  user user @relation(fields: [userId], references: [id])
+  user    user     @relation(fields: [userId], references: [id])
+  upvotes upvote[]
+}
+
+model upvote {
+  id        String @id @db.Uuid
+  commentId String @db.Uuid
+  userId    String @db.Uuid
+
+  comment comment @relation(fields: [commentId], references: [id])
+  user    user    @relation(fields: [userId], references: [id])
+
+  @@unique([commentId, userId])
 }

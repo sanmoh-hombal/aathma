@@ -12,9 +12,12 @@
 		"server:dev": "nodemon --watch server server/index.ts",
 		"server:build": "ttsc --esModuleInterop --outDir dist server/index.ts",
 		"server:start": "node dist/server/index.js",
+		"migrate:dev": "prisma migrate dev",
+		"migrate:deploy": "prisma migrate deploy",
+		"migrate:generate": "prisma generate",
 		"dev": "concurrently \"yarn client:dev\" \"yarn server:dev\"",
-		"build": "rimraf dist && yarn server:build && yarn client:build",
-		"start": "concurrently \"yarn client:start\" \"yarn server:start\"",
+		"build": "rimraf dist && yarn migrate:generate && yarn server:build && yarn client:build",
+		"start": "yarn migrate:deploy && concurrently \"yarn client:start\" \"yarn server:start\"",
 		"prepare": "ts-patch install && husky install"
 	},
 	"devDependencies": {

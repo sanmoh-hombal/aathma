@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { AthButtonComponent } from "@client/components/atoms";
-import { UpvoteService, UserService } from "@client/services";
+import { SocketProvider } from "@client/providers";
+import { UserService } from "@client/services";
 
 import { ICommentUserUpvote } from "@global/types/comment.type";
 import { IUpvote } from "@global/types/upvote.types";
@@ -21,11 +22,19 @@ const AthUpvoteComment: React.FC<IAthUpvoteCommentProps> = ({
 	const [loading, setLoading] = useState<boolean>(false);
 	const [derivedUpvotes, setDerivedUpvotes] = useState<Array<IUpvote>>(upvotes);
 
+	const socket = useContext(SocketProvider.SocketContext);
+
+	useEffect(() => {
+		socket.on(
+			"upvote:refresh",
+			(response: ICommentUserUpvote) => response.id === commentId && setDerivedUpvotes(response.upvotes || []),
+		);
+	}, [socket]);
+
 	const handleClick = async (): Promise<void> => {
 		try {
 			setLoading(true);
-			const updatedComment: ICommentUserUpvote = await UpvoteService.toggle(commentId);
-			setDerivedUpvotes(updatedComment.upvotes || []);
+			socket.emit("upvote:toggle", commentId, UserService.getIdFromLocalStorage());
 		} finally {
 			setLoading(false);
 		}

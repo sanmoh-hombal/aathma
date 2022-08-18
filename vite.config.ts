@@ -9,6 +9,10 @@ const proxy: Record<string, string | ProxyOptions> = {
 		changeOrigin: true,
 		rewrite: (path) => path.replace(/^\/api/, ""),
 	},
+	"/socket.io": {
+		target: "ws://localhost:8080",
+		ws: true,
+	},
 };
 
 const configuration: UserConfig = {

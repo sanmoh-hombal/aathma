@@ -12,8 +12,8 @@ export interface IAthCommentProps extends React.HTMLAttributes<HTMLDivElement> {
 const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommentProps): JSX.Element => {
 	return (
 		<div className="flex items-stretch pb-10 last:pb-0" {...rest}>
-			<div className="flex flex-col mr-4">
-				<img src={comment.user!.picture} className="rounded-full w-9" />
+			<div className="flex flex-col shrink-0 mr-4">
+				<img src={comment.user!.picture} />
 				{comment.children && comment.children.length > 0 ? (
 					<div className="flex flex-1 divide-x">
 						<div className="w-1/2" />

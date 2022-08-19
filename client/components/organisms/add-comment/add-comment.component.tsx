@@ -43,7 +43,7 @@ const AthAddComment: React.FC<IAthAddCommentProps> = ({ onComplete }: IAthAddCom
 
 	return (
 		<div className="flex items-center border-b py-10">
-			{user && <img src={user.picture} className="rounded-full w-9 mr-4" />}
+			{user && <img src={user.picture} className="mr-4" />}
 			<AthAddCommentForm loading={loading} onSubmit={_handleSubmit} />
 		</div>
 	);

@@ -4,6 +4,7 @@ import AthReplyCommentComponent from "@client/components/molecules/reply-comment
 import AthUpvoteCommentComponent from "@client/components/molecules/upvote-comment";
 import { DateUtil } from "@client/utils";
 
+import { AthButtonComponent } from "@client/components/atoms";
 import { ICommentUserUpvote } from "@global/types/comment.type";
 
 export interface IAthCommentProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -12,6 +13,7 @@ export interface IAthCommentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommentProps): JSX.Element => {
 	const [derivedComment, setDerivedComment] = useState<ICommentUserUpvote>(comment);
+	const [showAllChildren, setShowAllChildren] = useState<boolean>(false);
 
 	return (
 		<div className={`flex ${comment.parentId ? "" : "pb-10"} last:pb-0`} {...rest}>
@@ -46,9 +48,16 @@ const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommen
 						<AthReplyCommentComponent onComplete={setDerivedComment} parentComment={derivedComment} className="ml-4" />
 					)}
 				</div>
-				{(derivedComment.children || []).map((child: ICommentUserUpvote) => (
-					<AthComment key={child.id} comment={child} />
-				))}
+				{(showAllChildren ? derivedComment.children || [] : (derivedComment.children || []).slice(0, 2)).map(
+					(child: ICommentUserUpvote) => (
+						<AthComment key={child.id} comment={child} />
+					),
+				)}
+				{!derivedComment.parentId && (derivedComment.children || []).length >= 2 && (
+					<AthButtonComponent secondary small onClick={() => setShowAllChildren(!showAllChildren)}>
+						{showAllChildren ? "Hide Replies" : `Show All Replies (${(derivedComment.children || []).length - 2}+)`}
+					</AthButtonComponent>
+				)}
 			</div>
 		</div>
 	);

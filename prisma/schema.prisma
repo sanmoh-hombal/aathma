@@ -27,8 +27,10 @@ model comment {
   userId   String    @db.Uuid
   content  String
 
-  user    user     @relation(fields: [userId], references: [id])
-  upvotes upvote[]
+  user     user      @relation(fields: [userId], references: [id])
+  upvotes  upvote[]
+  children comment[] @relation("children")
+  parent   comment?  @relation("children", fields: [parentId], references: [id])
 }
 
 model upvote {

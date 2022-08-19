@@ -29,7 +29,11 @@ export async function get(
 			orderBy: { created: "desc" },
 			take: pageSize,
 			skip: (page - 1) * pageSize,
-			include: { user: true, upvotes: true, children: { include: { user: true, upvotes: true } } },
+			include: {
+				user: true,
+				upvotes: true,
+				children: { include: { user: true, upvotes: true }, orderBy: { created: "desc" } },
+			},
 		});
 	} catch (e) {
 		throw e;
@@ -54,7 +58,7 @@ export async function add(content: string, userId?: string, parentId?: string): 
 
 		const comment: ICommentUserUpvote = await PrismaClient.comment.create({
 			data: { id: randomUUID(), userId: user.id, parentId, content },
-			include: { user: true, upvotes: true, parent: true },
+			include: { user: true, upvotes: true, children: true },
 		});
 
 		return comment;

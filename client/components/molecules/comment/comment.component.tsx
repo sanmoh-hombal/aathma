@@ -11,8 +11,18 @@ export interface IAthCommentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommentProps): JSX.Element => {
 	return (
-		<div className="flex items-start pb-10 last:pb-0" {...rest}>
-			<img src={comment.user!.picture} className="rounded-full w-9 mr-4" />
+		<div className="flex items-stretch pb-10 last:pb-0" {...rest}>
+			<div className="flex flex-col mr-4">
+				<img src={comment.user!.picture} className="rounded-full w-9" />
+				{comment.children && comment.children.length > 0 ? (
+					<div className="flex flex-1 divide-x">
+						<div className="w-1/2" />
+						<div className="w-1/2" />
+					</div>
+				) : (
+					""
+				)}
+			</div>
 			<div className="flex-0">
 				<div className="flex items-center">
 					<div className="font-bold">
@@ -22,13 +32,16 @@ const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommen
 					<div className="text-secondary-500 text-sm">{DateUtil.humanize(String(comment.created))}</div>
 				</div>
 				<div className="font-light mb-4">{comment.content}</div>
-				<div className="flex">
+				<div className="flex mb-4">
 					<AthUpvoteCommentComponent
 						commentId={comment.id}
 						ownerId={comment.user!.id}
 						upvotes={comment.upvotes || []}
 					/>
 				</div>
+				{(comment.children || []).map((child: ICommentUserUpvote) => (
+					<AthComment key={child.id} comment={child} />
+				))}
 			</div>
 		</div>
 	);

@@ -4,14 +4,15 @@ import { AxiosUtil } from "@client/utils";
 import { ICommentUserUpvote } from "@global/types/comment.type";
 
 /**
- * It adds a comment to the database, and returns the comment with the user and upvotes
+ * It adds a comment to the database, and returns the comment with the user and upvote information
  * @param {string} content - string - The content of the comment
+ * @param {string} [parentId] - The id of the comment that this comment is a reply to.
  * @return {ICommentUserUpvote} A promise that resolves to an ICommentUserUpvote
  */
-export async function add(content: string): Promise<ICommentUserUpvote> {
+export async function add(content: string, parentId?: string): Promise<ICommentUserUpvote> {
 	try {
 		const userId: string | null = UserService.getIdFromLocalStorage();
-		const comment: ICommentUserUpvote = (await AxiosUtil.post("comment", { content, userId })).data;
+		const comment: ICommentUserUpvote = (await AxiosUtil.post("comment", { content, userId, parentId })).data;
 		comment.user?.id && UserService.setIdToLocalStorage(comment.user.id);
 		return comment;
 	} catch (e) {

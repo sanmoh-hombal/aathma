@@ -6,11 +6,16 @@ import { CommentService, UserService } from "@client/services";
 import { ICommentUserUpvote } from "@global/types/comment.type";
 import { IUser } from "@global/types/user.type";
 
-export interface IAthAddCommentProps {
-	onComplete: Function;
+export interface IAthAddCommentProps extends React.HTMLAttributes<HTMLDivElement> {
+	onComplete?: Function;
+	parentComment?: ICommentUserUpvote;
 }
 
-const AthAddComment: React.FC<IAthAddCommentProps> = ({ onComplete }: IAthAddCommentProps): JSX.Element => {
+const AthAddComment: React.FC<IAthAddCommentProps> = ({
+	onComplete,
+	parentComment,
+	...rest
+}: IAthAddCommentProps): JSX.Element => {
 	const [user, setUser] = useState<IUser | null>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -28,9 +33,9 @@ const AthAddComment: React.FC<IAthAddCommentProps> = ({ onComplete }: IAthAddCom
 		try {
 			setLoading(true);
 			e.preventDefault();
-			const comment: ICommentUserUpvote = await CommentService.add(e.target[0].value);
+			const comment: ICommentUserUpvote = await CommentService.add(e.target[0].value, parentComment?.id);
 			!user && (await _fetchUser());
-			onComplete(comment);
+			onComplete && onComplete(comment);
 			e.target.reset();
 		} finally {
 			setLoading(false);
@@ -42,7 +47,7 @@ const AthAddComment: React.FC<IAthAddCommentProps> = ({ onComplete }: IAthAddCom
 	}, []);
 
 	return (
-		<div className="flex items-center border-b py-10">
+		<div className={`flex items-center ${rest.className ? rest.className : ""}`}>
 			{user && <img src={user.picture} className="mr-4" />}
 			<AthAddCommentForm loading={loading} onSubmit={_handleSubmit} />
 		</div>

@@ -1,5 +1,6 @@
 import React from "react";
 
+import AthReplyCommentComponent from "@client/components/molecules/reply-comment";
 import AthUpvoteCommentComponent from "@client/components/molecules/upvote-comment";
 import { DateUtil } from "@client/utils";
 
@@ -11,7 +12,7 @@ export interface IAthCommentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommentProps): JSX.Element => {
 	return (
-		<div className="flex items-stretch pb-10 last:pb-0" {...rest}>
+		<div className="flex pb-10 last:pb-0" {...rest}>
 			<div className="flex flex-col shrink-0 mr-4">
 				<img src={comment.user!.picture} />
 				{comment.children && comment.children.length > 0 ? (
@@ -23,7 +24,7 @@ const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommen
 					""
 				)}
 			</div>
-			<div className="flex-0">
+			<div className="grow">
 				<div className="flex items-center">
 					<div className="font-bold">
 						{comment.user!.firstName} {comment.user!.lastName}
@@ -32,12 +33,14 @@ const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommen
 					<div className="text-secondary-500 text-sm">{DateUtil.humanize(String(comment.created))}</div>
 				</div>
 				<div className="font-light mb-4">{comment.content}</div>
-				<div className="flex mb-4">
+				<div className="mb-4">
 					<AthUpvoteCommentComponent
 						commentId={comment.id}
 						ownerId={comment.user!.id}
 						upvotes={comment.upvotes || []}
+						className="mr-4"
 					/>
+					{!comment.parentId && <AthReplyCommentComponent parentComment={comment} className="ml-4" />}
 				</div>
 				{(comment.children || []).map((child: ICommentUserUpvote) => (
 					<AthComment key={child.id} comment={child} />

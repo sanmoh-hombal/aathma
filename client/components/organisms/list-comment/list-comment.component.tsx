@@ -9,7 +9,7 @@ export interface IListCommentProps {
 
 const AthListComment: React.FC<IListCommentProps> = ({ comments }: IListCommentProps): JSX.Element => {
 	return (
-		<div className="flex flex-col items-start py-10">
+		<div className="py-10">
 			{comments.map((comment: ICommentUserUpvote) => (
 				<AthComment comment={comment} key={comment.id} />
 			))}

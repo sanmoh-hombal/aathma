@@ -46,6 +46,8 @@ export async function add(content: string, userId?: string, parentId?: string): 
 		const comment: ICommentUserUpvote = await PrismaClient.comment.create({
 			data: { id: randomUUID(), userId: user.id, parentId, content },
 			include: {
+				user: true,
+				upvotes: true,
 				parent: {
 					include: {
 						user: true,

@@ -1,6 +1,6 @@
 {
 	"name": "aathma",
-	"version": "0.0.0",
+	"version": "2.0.0",
 	"description": "A simple UI/API/WS hybrid application for random commenting and upvoting",
 	"repository": "https://github.com/sanmoh-hombal/aathma.git",
 	"author": "Sanmoh Hombal <sanmoh.hombal@gmail.com>",

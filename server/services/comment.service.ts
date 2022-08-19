@@ -6,29 +6,16 @@ import { IUser } from "@global/types/user.type";
 
 import { UserService } from "@server/services";
 
-export const DEFAULT_PAGE: number = 1;
-export const PAGE_SIZE: number = 10;
-
 /**
- * It returns a list of comments, ordered by creation date, with a maximum of `pageSize` comments per
- * page, starting from the `page`th page
- * @param {number} page - The page number of the comments to return.
- * @param {number} pageSize - number = PAGE_SIZE (10),
- * @param {string} [parentId] - The id of the parent comment. If this is not provided, it will return
- * the top-level comments.
+ * It returns an array of comments, including their children, and the user and upvotes for each comment
+ * @param {string} [parentId] - The id of the parent comment. If this is null, it will return the top level comments.
  * @return {Array<ICommentUserUpvote>} An array of comments
  */
-export async function get(
-	page: number = DEFAULT_PAGE,
-	pageSize: number = PAGE_SIZE,
-	parentId?: string,
-): Promise<Array<ICommentUserUpvote>> {
+export async function get(parentId?: string): Promise<Array<ICommentUserUpvote>> {
 	try {
 		return await PrismaClient.comment.findMany({
 			where: { parentId: parentId || null },
 			orderBy: { created: "desc" },
-			take: pageSize,
-			skip: (page - 1) * pageSize,
 			include: {
 				user: true,
 				upvotes: true,

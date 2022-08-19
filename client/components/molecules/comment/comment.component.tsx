@@ -14,7 +14,7 @@ const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommen
 	const [derivedComment, setDerivedComment] = useState<ICommentUserUpvote>(comment);
 
 	return (
-		<div className="flex pb-10 last:pb-0" {...rest}>
+		<div className={`flex ${comment.parentId ? "" : "pb-10"} last:pb-0`} {...rest}>
 			<div className="flex flex-col shrink-0 mr-4">
 				<img src={derivedComment.user!.picture} />
 				{derivedComment.children && derivedComment.children.length > 0 ? (

@@ -7,7 +7,7 @@ import { ICommentUserUpvote } from "@global/types/comment.type";
 import { IUser } from "@global/types/user.type";
 
 export interface IAthAddCommentProps extends React.HTMLAttributes<HTMLDivElement> {
-	onComplete?: Function;
+	onComplete: Function;
 	parentComment?: ICommentUserUpvote;
 }
 

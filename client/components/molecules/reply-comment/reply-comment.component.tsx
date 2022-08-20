@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import AthButton from "@client/components/atoms/button/button.component";
-import AthAddComment from "@client/components/organisms/add-comment/add-comment.component";
+import { AthButtonComponent } from "@client/components/atoms";
+import { AthAddCommentComponent } from "@client/components/organisms";
 import { UserService } from "@client/services";
 
 import { ICommentUserUpvote } from "@global/types/comment.type";
@@ -20,7 +20,7 @@ const AthReplyCommentComponent: React.FC<IReplyCommentComponentProps> = ({
 
 	return (
 		<>
-			<AthButton
+			<AthButtonComponent
 				disabled={!UserService.getIdFromLocalStorage()}
 				secondary
 				small
@@ -28,9 +28,9 @@ const AthReplyCommentComponent: React.FC<IReplyCommentComponentProps> = ({
 				{...rest}
 			>
 				Reply
-			</AthButton>
+			</AthButtonComponent>
 			{formOpen && (
-				<AthAddComment
+				<AthAddCommentComponent
 					className="pt-8 pb-4"
 					parentComment={parentComment}
 					onComplete={(comment: ICommentUserUpvote) => {

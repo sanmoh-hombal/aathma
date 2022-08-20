@@ -1,5 +1,5 @@
 import AthAddCommentFormComponent from "@client/components/molecules/add-comment-form";
-import AthCommentComponent from "@client/components/molecules/comment";
+import AthReplyCommentComponent from "@client/components/molecules/reply-comment";
 import AthUpvoteCommentComponent from "@client/components/molecules/upvote-comment";
 
-export { AthAddCommentFormComponent, AthCommentComponent, AthUpvoteCommentComponent };
+export { AthAddCommentFormComponent, AthReplyCommentComponent, AthUpvoteCommentComponent };

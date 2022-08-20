@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { BaseSyntheticEvent, useState } from "react";
 
-import AthButton from "@client/components/atoms/button";
-import AthInput from "@client/components/atoms/input";
+import { AthButtonComponent, AthInputComponent } from "@client/components/atoms";
 
 export interface IAthAddCommentFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 	loading?: boolean;
@@ -16,16 +15,16 @@ const AthAddCommentForm: React.FC<IAthAddCommentFormProps> = ({
 
 	return (
 		<form {...rest} onReset={() => setComment("")} className={`flex flex-1 ${rest.className}`}>
-			<AthInput
+			<AthInputComponent
 				placeholder="What are your thoughts?"
 				loading={loading}
 				value={comment}
-				onInput={(event) => setComment((event.target as HTMLInputElement).value)}
+				onInput={(event: BaseSyntheticEvent) => setComment((event.target as HTMLInputElement).value)}
 				className="flex-1"
 			/>
-			<AthButton loading={loading} disabled={!comment} type="submit" className="ml-4">
+			<AthButtonComponent loading={loading} disabled={!comment} type="submit" className="ml-4">
 				Submit
-			</AthButton>
+			</AthButtonComponent>
 		</form>
 	);
 };

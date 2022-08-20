@@ -1,6 +1,6 @@
 import React, { BaseSyntheticEvent, useEffect, useState } from "react";
 
-import AthAddCommentForm from "@client/components/molecules/add-comment-form/add-comment-form.component";
+import { AthAddCommentFormComponent } from "@client/components/molecules";
 import { CommentService, UserService } from "@client/services";
 
 import { ICommentUserUpvote } from "@global/types/comment.type";
@@ -49,7 +49,7 @@ const AthAddComment: React.FC<IAthAddCommentProps> = ({
 	return (
 		<div className={`flex items-center ${rest.className ? rest.className : ""}`}>
 			{user && <img src={user.picture} className="mr-4" />}
-			<AthAddCommentForm loading={loading} onSubmit={_handleSubmit} />
+			<AthAddCommentFormComponent loading={loading} onSubmit={_handleSubmit} />
 		</div>
 	);
 };

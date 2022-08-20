@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-import AthReplyCommentComponent from "@client/components/molecules/reply-comment";
-import AthUpvoteCommentComponent from "@client/components/molecules/upvote-comment";
+import { AthButtonComponent } from "@client/components/atoms";
+import { AthReplyCommentComponent, AthUpvoteCommentComponent } from "@client/components/molecules";
 import { DateUtil } from "@client/utils";
 
-import { AthButtonComponent } from "@client/components/atoms";
 import { ICommentUserUpvote } from "@global/types/comment.type";
 
 export interface IAthCommentProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import AthAddComment from "@client/components/organisms/add-comment";
-import AthListComment from "@client/components/organisms/list-comment";
+import { AthAddCommentComponent, AthListCommentComponent } from "@client/components/organisms";
 import { SocketProvider } from "@client/providers";
 import { CommentService } from "@client/services";
 
@@ -23,8 +22,8 @@ const App: React.FC = (): JSX.Element => {
 		<SocketProvider.SocketContext.Provider value={SocketProvider.socket}>
 			<div className="mx-auto my-40 px-8 py-4 sm:w-1/2">
 				<div className="text-xl font-bold text-center sm:text-left">Discussion</div>
-				<AthAddComment onComplete={_refreshComments} className="py-10 border-b" />
-				<AthListComment comments={comments} />
+				<AthAddCommentComponent onComplete={_refreshComments} className="py-10 border-b" />
+				<AthListCommentComponent comments={comments} />
 			</div>
 		</SocketProvider.SocketContext.Provider>
 	);

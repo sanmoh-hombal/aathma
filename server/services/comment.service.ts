@@ -1,13 +1,11 @@
 import { randomUUID } from "crypto";
 
 import { PrismaClient } from "@global/clients";
+import Constants from "@global/constants";
 import { ICommentUserUpvote } from "@global/types/comment.type";
 import { IUser } from "@global/types/user.type";
 
 import { UserService } from "@server/services";
-
-export const DEFAULT_PAGE: number = 1;
-export const PAGE_SIZE: number = 10;
 
 /**
  * It returns a list of comments, including their children, user, and upvotes
@@ -18,8 +16,8 @@ export const PAGE_SIZE: number = 10;
  * @return {Array<ICommentUserUpvote>} An array of comments with their user and upvotes.
  */
 export async function get(
-	page: number = DEFAULT_PAGE,
-	pageSize: number = PAGE_SIZE,
+	page: number = Constants.DEFAULT_PAGE,
+	pageSize: number = Constants.PAGE_SIZE,
 	parentId?: string,
 ): Promise<Array<ICommentUserUpvote>> {
 	try {

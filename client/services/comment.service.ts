@@ -1,6 +1,7 @@
 import { UserService } from "@client/services";
 import { AxiosUtil } from "@client/utils";
 
+import Constants from "@global/constants";
 import { ICommentUserUpvote } from "@global/types/comment.type";
 
 /**
@@ -21,12 +22,19 @@ export async function add(content: string, parentId?: string): Promise<ICommentU
 }
 
 /**
- * It makes a GET request to the `/comment` endpoint and returns the response data
- * @return {Array<ICommentUserUpvote>} A promise that resolves to an array of ICommentUserUpvote objects
+ * It gets a list of comments
+ * @param {number} page - The page number to get.
+ * @param {number} pageSize - The number of comments to return per page.
+ * @param {string} [parentId] - The id of the comment that you want to get the replies for.
+ * @return {Array<ICommentUserUpvote>} An array of ICommentUserUpvote
  */
-export async function get(): Promise<Array<ICommentUserUpvote>> {
+export async function get(
+	page: number = Constants.DEFAULT_PAGE,
+	pageSize: number = Constants.PAGE_SIZE,
+	parentId?: string,
+): Promise<Array<ICommentUserUpvote>> {
 	try {
-		return (await AxiosUtil.get("comment")).data;
+		return (await AxiosUtil.get("comment", { params: { page, pageSize, parentId } })).data;
 	} catch (e) {
 		throw e;
 	}

@@ -1,6 +1,7 @@
+import { PrismaClientValidationError } from "@prisma/client/runtime";
 import { NextFunction, Request, Response } from "express";
 
-import { PrismaClientValidationError } from "@prisma/client/runtime";
+import Constants from "@global/constants";
 
 import { CommentService } from "@server/services";
 
@@ -10,8 +11,8 @@ export async function get(request: Request, response: Response, _next: NextFunct
 			.status(200)
 			.json(
 				await CommentService.get(
-					parseInt(request.query.page?.toString() || CommentService.DEFAULT_PAGE.toString()),
-					parseInt(request.query.pageSize?.toString() || CommentService.PAGE_SIZE.toString()),
+					parseInt(request.query.page?.toString() || Constants.DEFAULT_PAGE.toString()),
+					parseInt(request.query.pageSize?.toString() || Constants.PAGE_SIZE.toString()),
 					request.body.parentId,
 				),
 			);

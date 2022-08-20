@@ -1,4 +1,4 @@
-import AthButtonComponent from "@client/components/atoms/button";
-import AthInputComponent from "@client/components/atoms/input";
+import AthButton from "@client/components/atoms/button";
+import AthInput from "@client/components/atoms/input";
 
-export { AthButtonComponent, AthInputComponent };
+export { AthButton, AthInput };

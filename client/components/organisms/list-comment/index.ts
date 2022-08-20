@@ -1,3 +1,3 @@
-import AthListCommentComponent from "@client/components/organisms/list-comment/list-comment.component";
+import AthListComment from "@client/components/organisms/list-comment/list-comment.component";
 
-export default AthListCommentComponent;
+export default AthListComment;

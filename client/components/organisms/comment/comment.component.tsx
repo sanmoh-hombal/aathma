@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { AthButtonComponent } from "@client/components/atoms";
-import { AthReplyCommentComponent, AthUpvoteCommentComponent } from "@client/components/molecules";
+import { AthButton } from "@client/components/atoms";
+import { AthReplyComment, AthUpvoteComment } from "@client/components/molecules";
 import { DateUtil } from "@client/utils";
 
 import { ICommentUserUpvote } from "@global/types/comment.type";
@@ -37,14 +37,14 @@ const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommen
 				</div>
 				<div className="font-light mb-4">{derivedComment.content}</div>
 				<div className="mb-4">
-					<AthUpvoteCommentComponent
+					<AthUpvoteComment
 						commentId={derivedComment.id}
 						ownerId={derivedComment.user!.id}
 						upvotes={derivedComment.upvotes || []}
 						className="mr-4"
 					/>
 					{!derivedComment.parentId && (
-						<AthReplyCommentComponent onComplete={setDerivedComment} parentComment={derivedComment} className="ml-4" />
+						<AthReplyComment onComplete={setDerivedComment} parentComment={derivedComment} className="ml-4" />
 					)}
 				</div>
 				{(showAllChildren ? derivedComment.children || [] : (derivedComment.children || []).slice(0, 2)).map(
@@ -53,9 +53,9 @@ const AthComment: React.FC<IAthCommentProps> = ({ comment, ...rest }: IAthCommen
 					),
 				)}
 				{!derivedComment.parentId && (derivedComment.children || []).length >= 2 && (
-					<AthButtonComponent secondary small onClick={() => setShowAllChildren(!showAllChildren)}>
+					<AthButton secondary small onClick={() => setShowAllChildren(!showAllChildren)}>
 						{showAllChildren ? "Hide Replies" : `Show All Replies (${(derivedComment.children || []).length - 2}+)`}
-					</AthButtonComponent>
+					</AthButton>
 				)}
 			</div>
 		</div>

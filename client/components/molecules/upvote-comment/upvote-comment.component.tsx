@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { AthButtonComponent } from "@client/components/atoms";
+import { AthButton } from "@client/components/atoms";
 import { SocketProvider } from "@client/providers";
 import { UserService } from "@client/services";
 
@@ -41,7 +41,7 @@ const AthUpvoteComment: React.FC<IAthUpvoteCommentProps> = ({
 	};
 
 	return (
-		<AthButtonComponent
+		<AthButton
 			loading={loading}
 			active={
 				derivedUpvotes.filter((upvote: IUpvote) => upvote.userId === UserService.getIdFromLocalStorage()).length > 0
@@ -55,7 +55,7 @@ const AthUpvoteComment: React.FC<IAthUpvoteCommentProps> = ({
 			<span>&#9650;</span>
 			<span className="px-2">Upvote</span>
 			{derivedUpvotes.length > 0 ? <span className="text-xs border-l pl-2">{derivedUpvotes.length}</span> : ""}
-		</AthButtonComponent>
+		</AthButton>
 	);
 };
 

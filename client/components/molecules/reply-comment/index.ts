@@ -1,3 +1,3 @@
-import AthReplyCommentComponent from "@client/components/molecules/reply-comment/reply-comment.component";
+import AthReplyComment from "@client/components/molecules/reply-comment/reply-comment.component";
 
-export default AthReplyCommentComponent;
+export default AthReplyComment;

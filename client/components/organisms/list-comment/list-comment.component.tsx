@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AthCommentComponent } from "@client/components/organisms";
+import { AthComment } from "@client/components/organisms";
 import { ICommentUserUpvote } from "@global/types/comment.type";
 
 export interface IListCommentProps {
@@ -11,7 +11,7 @@ const AthListComment: React.FC<IListCommentProps> = ({ comments }: IListCommentP
 	return (
 		<div className="py-10">
 			{comments.map((comment: ICommentUserUpvote) => (
-				<AthCommentComponent comment={comment} key={comment.id} />
+				<AthComment comment={comment} key={comment.id} />
 			))}
 		</div>
 	);

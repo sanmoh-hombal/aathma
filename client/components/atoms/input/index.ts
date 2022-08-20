@@ -1,3 +1,3 @@
-import AthInputComponent from "@client/components/atoms/input/input.component";
+import AthInput from "@client/components/atoms/input/input.component";
 
-export default AthInputComponent;
+export default AthInput;

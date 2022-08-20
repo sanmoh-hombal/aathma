@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { AthButton } from "@client/components/atoms";
 import { AthComment } from "@client/components/organisms";
@@ -14,6 +14,7 @@ export interface IAthCommentRepliesProps extends React.HTMLAttributes<HTMLDivEle
 const AthCommentReplies: React.FC<IAthCommentRepliesProps> = ({ comment }: IAthCommentRepliesProps): JSX.Element => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [page, setPage] = useState<number>(2);
+	const [total, setTotal] = useState<number>(comment._count?.children!);
 	const [replies, setReplies] = useState<Array<ICommentUserUpvote>>(comment.children || []);
 
 	const _fetchReplies = async () => {
@@ -28,15 +29,21 @@ const AthCommentReplies: React.FC<IAthCommentRepliesProps> = ({ comment }: IAthC
 		setLoading(false);
 	};
 
+	/* Bad hack to make rerenders work on nested object mutability. Fix Later on */
+	useEffect(() => {
+		setTotal(comment._count?.children!);
+		setReplies(comment.children || []);
+	}, [comment]);
+
 	return (
 		<>
 			{replies.map((reply: ICommentUserUpvote) => (
 				<AthComment comment={reply} key={reply.id} />
 			))}
-			{comment._count && comment._count.children > 2 && comment._count.children !== replies.length && (
+			{total > 2 && total !== replies.length && (
 				<AthButton loading={loading} secondary small className="mt-5" onClick={_fetchReplies}>
-					Show {comment._count.children - replies.length} More Repl
-					{comment._count.children - replies.length > 1 ? "ies" : "y"}
+					Show {total - replies.length} More Repl
+					{total - replies.length > 1 ? "ies" : "y"}
 				</AthButton>
 			)}
 		</>

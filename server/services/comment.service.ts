@@ -72,7 +72,12 @@ export async function add(content: string, userId?: string, parentId?: string): 
 					include: {
 						user: true,
 						upvotes: true,
-						children: { include: { user: true, upvotes: true }, orderBy: { created: "desc" } },
+						_count: true,
+						children: {
+							orderBy: { created: "desc" },
+							include: { user: true, upvotes: true },
+							take: Constants.REPLIES_PAGE_SIZE,
+						},
 					},
 				},
 			},

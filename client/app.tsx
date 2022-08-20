@@ -51,7 +51,10 @@ const App: React.FC = (): JSX.Element => {
 		<SocketProvider.SocketContext.Provider value={SocketProvider.socket}>
 			<div className="mx-auto my-40 px-8 py-4 sm:w-1/2">
 				<div className="text-xl font-bold text-center sm:text-left">Discussion</div>
-				<AthAddComment onComplete={_refreshComments} className="py-10 border-b" />
+				<AthAddComment
+					onComplete={(newComment: ICommentUserUpvote) => setComments([...new Set([newComment, ...comments])])}
+					className="py-10 border-b"
+				/>
 				<div className="py-10">
 					{comments.length > 0 &&
 						comments.map((comment: ICommentUserUpvote, index: number) => {

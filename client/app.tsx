@@ -4,14 +4,15 @@ import { AthAddComment, AthComment } from "@client/components/organisms";
 import { SocketProvider } from "@client/providers";
 import { CommentService } from "@client/services";
 
-import { ICommentUserUpvote } from "@global/types/comment.type";
+import Constants from "@global/constants";
+import { ICommentUserUpvote, ICommentUserUpvoteResponse } from "@global/types/comment.type";
 
-// TODO: Get total pages from the API later on
-const MAX_PAGES: number = 3;
+const MAX_PAGES: number = 1000;
 
 const App: React.FC = (): JSX.Element => {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [page, setPage] = useState<number>(1);
+	const [total, setTotal] = useState<number>(MAX_PAGES);
 	const [comments, setComments] = useState<Array<ICommentUserUpvote>>([]);
 	const [lastElement, setLastElement] = useState<HTMLDivElement | null>(null);
 
@@ -24,14 +25,15 @@ const App: React.FC = (): JSX.Element => {
 
 	const _refreshComments = async (): Promise<void> => {
 		setLoading(true);
-		const commentsResponse: Array<ICommentUserUpvote> = await CommentService.get(page);
-		setComments([...new Set([...comments, ...commentsResponse])]);
+		const commentsResponse: ICommentUserUpvoteResponse = await CommentService.get(page);
+		setComments([...new Set([...comments, ...commentsResponse.comments])]);
 		setPage(page + 1);
+		setTotal(commentsResponse.total);
 		setLoading(false);
 	};
 
 	useEffect(() => {
-		page < MAX_PAGES && _refreshComments();
+		page < total / Constants.PAGE_SIZE && _refreshComments();
 	}, [page]);
 
 	useEffect(() => {
@@ -53,7 +55,7 @@ const App: React.FC = (): JSX.Element => {
 				<div className="py-10">
 					{comments.length > 0 &&
 						comments.map((comment: ICommentUserUpvote, index: number) => {
-							return index === comments.length - 1 && !loading && page <= MAX_PAGES ? (
+							return index === comments.length - 1 && !loading && page <= total / Constants.PAGE_SIZE ? (
 								<div ref={setLastElement} key={comment.id}>
 									<AthComment comment={comment} key={comment.id} />
 								</div>
@@ -63,7 +65,6 @@ const App: React.FC = (): JSX.Element => {
 						})}
 				</div>
 				{loading && <div>Loading</div>}
-				{page - 1 === MAX_PAGES && <div>No More Comments</div>}
 			</div>
 		</SocketProvider.SocketContext.Provider>
 	);

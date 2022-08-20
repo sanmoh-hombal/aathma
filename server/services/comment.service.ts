@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 
 import { PrismaClient } from "@global/clients";
 import Constants from "@global/constants";
-import { ICommentUserUpvote } from "@global/types/comment.type";
+import { ICommentUserUpvote, ICommentUserUpvoteResponse } from "@global/types/comment.type";
 import { IUser } from "@global/types/user.type";
 
 import { UserService } from "@server/services";
@@ -13,25 +13,35 @@ import { UserService } from "@server/services";
  * @param {number} pageSize - number = PAGE_SIZE,
  * @param {string} [parentId] - The id of the parent comment. If this is not provided, it will return
  * the top-level comments.
- * @return {Array<ICommentUserUpvote>} An array of comments with their user and upvotes.
+ * @return {ICommentUserUpvoteResponse} An array of comments with their user and upvotes.
  */
 export async function get(
 	page: number = Constants.DEFAULT_PAGE,
 	pageSize: number = Constants.PAGE_SIZE,
 	parentId?: string,
-): Promise<Array<ICommentUserUpvote>> {
+): Promise<ICommentUserUpvoteResponse> {
 	try {
-		return await PrismaClient.comment.findMany({
-			where: { parentId: parentId || null },
-			orderBy: { created: "desc" },
-			include: {
-				user: true,
-				upvotes: true,
-				children: { include: { user: true, upvotes: true }, orderBy: { created: "desc" } },
-			},
-			take: pageSize,
-			skip: (page - 1) * pageSize,
-		});
+		const where: Record<string, any> = { parentId: parentId || null };
+		const [count, comments] = await PrismaClient.$transaction([
+			PrismaClient.comment.count({ where }),
+			PrismaClient.comment.findMany({
+				where,
+				orderBy: { created: "desc" },
+				include: {
+					user: true,
+					upvotes: true,
+					children: { include: { user: true, upvotes: true }, orderBy: { created: "desc" } },
+				},
+				take: pageSize,
+				skip: (page - 1) * pageSize,
+			}),
+		]);
+		return {
+			comments,
+			page,
+			pageSize,
+			total: count,
+		};
 	} catch (e) {
 		throw e;
 	} finally {

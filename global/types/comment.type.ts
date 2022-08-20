@@ -9,4 +9,11 @@ type ICommentUserUpvote = IComment & {
 	parent?: (IComment & { user?: IUser; upvotes?: Array<IUpvote> }) | null;
 };
 
-export type { IComment, ICommentUserUpvote };
+type ICommentUserUpvoteResponse = {
+	comments: Array<ICommentUserUpvote>;
+	page: number;
+	pageSize: number;
+	total: number;
+};
+
+export type { IComment, ICommentUserUpvote, ICommentUserUpvoteResponse };

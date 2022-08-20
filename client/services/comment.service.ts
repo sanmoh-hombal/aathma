@@ -2,7 +2,7 @@ import { UserService } from "@client/services";
 import { AxiosUtil } from "@client/utils";
 
 import Constants from "@global/constants";
-import { ICommentUserUpvote } from "@global/types/comment.type";
+import { ICommentUserUpvote, ICommentUserUpvoteResponse } from "@global/types/comment.type";
 
 /**
  * It adds a comment to the database, and returns the comment with the user and upvote information
@@ -26,13 +26,13 @@ export async function add(content: string, parentId?: string): Promise<ICommentU
  * @param {number} page - The page number to get.
  * @param {number} pageSize - The number of comments to return per page.
  * @param {string} [parentId] - The id of the comment that you want to get the replies for.
- * @return {Array<ICommentUserUpvote>} An array of ICommentUserUpvote
+ * @return {ICommentUserUpvoteResponse} An array of ICommentUserUpvote
  */
 export async function get(
 	page: number = Constants.DEFAULT_PAGE,
 	pageSize: number = Constants.PAGE_SIZE,
 	parentId?: string,
-): Promise<Array<ICommentUserUpvote>> {
+): Promise<ICommentUserUpvoteResponse> {
 	try {
 		return (await AxiosUtil.get("comment", { params: { page, pageSize, parentId } })).data;
 	} catch (e) {

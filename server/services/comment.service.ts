@@ -30,18 +30,18 @@ export async function get(
 				include: {
 					user: true,
 					upvotes: true,
-					children: { include: { user: true, upvotes: true }, orderBy: { created: "desc" } },
+					_count: true,
+					children: {
+						orderBy: { created: "desc" },
+						include: { user: true, upvotes: true },
+						take: Constants.REPLIES_PAGE_SIZE,
+					},
 				},
 				take: pageSize,
 				skip: (page - 1) * pageSize,
 			}),
 		]);
-		return {
-			comments,
-			page,
-			pageSize,
-			total: count,
-		};
+		return { comments, page, pageSize, total: count };
 	} catch (e) {
 		throw e;
 	} finally {

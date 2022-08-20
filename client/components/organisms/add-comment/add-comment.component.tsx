@@ -8,12 +8,12 @@ import { IUser } from "@global/types/user.type";
 
 export interface IAthAddCommentProps extends React.HTMLAttributes<HTMLDivElement> {
 	onComplete: Function;
-	parentComment?: ICommentUserUpvote;
+	parentId?: string;
 }
 
 const AthAddComment: React.FC<IAthAddCommentProps> = ({
 	onComplete,
-	parentComment,
+	parentId,
 	...rest
 }: IAthAddCommentProps): JSX.Element => {
 	const [user, setUser] = useState<IUser | null>(null);
@@ -33,7 +33,7 @@ const AthAddComment: React.FC<IAthAddCommentProps> = ({
 		try {
 			setLoading(true);
 			e.preventDefault();
-			const comment: ICommentUserUpvote = await CommentService.add(e.target[0].value, parentComment?.id);
+			const comment: ICommentUserUpvote = await CommentService.add(e.target[0].value, parentId);
 			!user && (await _fetchUser());
 			onComplete && onComplete(comment);
 			e.target.reset();

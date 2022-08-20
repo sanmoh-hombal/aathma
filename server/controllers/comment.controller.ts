@@ -13,7 +13,7 @@ export async function get(request: Request, response: Response, _next: NextFunct
 				await CommentService.get(
 					parseInt(request.query.page?.toString() || Constants.DEFAULT_PAGE.toString()),
 					parseInt(request.query.pageSize?.toString() || Constants.PAGE_SIZE.toString()),
-					request.body.parentId,
+					request.query.parentId?.toString(),
 				),
 			);
 	} catch (e: Error | any) {

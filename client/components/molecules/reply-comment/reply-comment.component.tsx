@@ -7,12 +7,12 @@ import { UserService } from "@client/services";
 import { ICommentUserUpvote } from "@global/types/comment.type";
 
 export interface IReplyCommentComponentProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	parentComment?: ICommentUserUpvote;
+	parentId: string;
 	onComplete: Function;
 }
 
 const AthReplyComment: React.FC<IReplyCommentComponentProps> = ({
-	parentComment,
+	parentId,
 	onComplete,
 	...rest
 }: IReplyCommentComponentProps): JSX.Element => {
@@ -32,7 +32,7 @@ const AthReplyComment: React.FC<IReplyCommentComponentProps> = ({
 			{formOpen && (
 				<AthAddComment
 					className="pt-8 pb-4"
-					parentComment={parentComment}
+					parentId={parentId}
 					onComplete={(comment: ICommentUserUpvote) => {
 						setFormOpen(false);
 						onComplete(comment);

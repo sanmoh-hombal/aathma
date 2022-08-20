@@ -7,6 +7,7 @@ type ICommentUserUpvote = IComment & {
 	upvotes?: Array<IUpvote>;
 	children?: Array<IComment & { user?: IUser; upvotes?: Array<IUpvote> }>;
 	parent?: (IComment & { user?: IUser; upvotes?: Array<IUpvote> }) | null;
+	_count?: { upvotes: number; children: number };
 };
 
 type ICommentUserUpvoteResponse = {
